@@ -4,12 +4,15 @@ FROM node:18-alpine
 # Docker working directory
 WORKDIR /app
 
-# Copying file into APP directory of docker
+# Install yarn
+# RUN npm i yarn -g
 
+# Copying file into APP directory of docker
 COPY package*.json .
+COPY yarn.lock .
 
 # Then install the NPM module
-RUN npm install
+RUN yarn
 
 # Copy current directory to APP folder
 COPY . .
