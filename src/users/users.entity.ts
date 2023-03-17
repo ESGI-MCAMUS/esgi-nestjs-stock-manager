@@ -20,9 +20,9 @@ export class User extends Model {
   @Column
   createdAt: Date;
 
-  @Column
+  @Column({ onUpdate: 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
-  @Column
-  deletedAt: Date;
+  @Column({ defaultValue: null })
+  deletedAt: Date | null;
 }
