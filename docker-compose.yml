@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    ports:
+      - '${MYSQL_PORT}:${MYSQL_PORT}'
+    expose:
+      - '${MYSQL_PORT}'
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+    container_name: mysql
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+  nestjs:
+    build:
+      dockerfile: Dockerfile
+    image: nestjs:latest
+    ports:
+      - '${APP_PORT}:${APP_PORT}' # expose-to-the-world : only-in-the-docker
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      - /app/node_modules
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  db:
