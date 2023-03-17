@@ -1,0 +1,2 @@
+DELETE {{base_url}}/users/1
+content-type: application/json

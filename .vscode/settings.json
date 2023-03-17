@@ -1,0 +1,30 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#f2b3ca",
+    "activityBar.background": "#f2b3ca",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#408817",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#f2b3ca",
+    "statusBar.background": "#ea88ac",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#e25d8e",
+    "statusBarItem.remoteBackground": "#ea88ac",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#ea88ac",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#ea88ac99",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#ea88ac",
+  "rest-client.environmentVariables": {
+    "local": {
+      "base_url": "http://localhost:3000"
+    },
+    "prod": {
+      "base_url": "https://stock-manager.mistergooddeal.org"
+    }
+  }
+}
