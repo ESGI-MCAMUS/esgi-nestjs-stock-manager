@@ -1,7 +1,7 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { passwordService } from 'src/service/password/password.service';
 import { User } from './users.entity';
-import { CreateUser } from './users.model';
+import { CreateUser, UserSearch } from './users.model';
 
 @Injectable()
 export class UsersService {
@@ -14,8 +14,8 @@ export class UsersService {
     return this.usersRepository.findAll<User>();
   }
 
-  async findOne(id: number): Promise<User> {
-    return this.usersRepository.findOne<User>({ where: { id } });
+  async findOne(query: UserSearch): Promise<User> {
+    return this.usersRepository.findOne<User>({ where: { ...query } });
   }
 
   async create(user: CreateUser): Promise<User> {

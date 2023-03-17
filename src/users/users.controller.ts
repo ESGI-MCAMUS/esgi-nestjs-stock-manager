@@ -9,7 +9,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { User } from './users.entity';
-import { CreateUser } from './users.model';
+import { CreateUser, UserSearch } from './users.model';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -22,10 +22,10 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
+  @Get()
   @HttpCode(200)
-  findOne(id: number): Promise<User> {
-    return this.usersService.findOne(id);
+  findOne(@Body() query: UserSearch): Promise<User> {
+    return this.usersService.findOne(query);
   }
 
   @Post()
