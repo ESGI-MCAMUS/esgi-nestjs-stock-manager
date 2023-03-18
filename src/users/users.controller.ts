@@ -14,7 +14,7 @@ import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Get()
   @HttpCode(200)
@@ -25,7 +25,7 @@ export class UsersController {
   @Get()
   @HttpCode(200)
   findOne(@Body() query: UserSearch): Promise<User> {
-    return this.usersService.findOne(query);
+    return this.usersService.findOne(query as any);
   }
 
   @Post()

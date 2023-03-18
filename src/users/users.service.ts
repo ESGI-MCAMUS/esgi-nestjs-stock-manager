@@ -1,14 +1,12 @@
-import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, Inject, HttpException, HttpStatus, Logger } from '@nestjs/common';
 import { passwordService } from 'src/service/password/password.service';
 import { User } from './users.entity';
-import { CreateUser, UserSearch } from './users.model';
-
-@Injectable()
+import { CreateUser, UserSearch } from './users.model'; @Injectable()
 export class UsersService {
   constructor(
     @Inject('USERS_REPOSITORY')
     private usersRepository: typeof User,
-  ) {}
+  ) { }
 
   async findAll(): Promise<User[]> {
     return this.usersRepository.findAll<User>();
@@ -36,7 +34,7 @@ export class UsersService {
     }
 
     // Create user
-    return this.usersRepository.create<User>({
+    const res = await this.usersRepository.create<User>({
       firstname: user.firstname,
       lastname: user.lastname,
       role: 'USER',
@@ -46,6 +44,8 @@ export class UsersService {
       updatedAt: new Date(),
       deletedAt: null,
     });
+
+    return res;
   }
 
   async update(id: number, user: Partial<User>): Promise<User> {
