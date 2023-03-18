@@ -7,10 +7,11 @@ import { OrdersController } from './orders/orders.controller';
 import { OrdersService } from './orders/orders.service';
 import { SuppliersController } from './suppliers/suppliers.controller';
 import { SuppliersService } from './suppliers/suppliers.service';
-
+import { AuthModule } from './auth/auth.module';
+import { AuthController } from './auth/auth.controller';
 @Module({
-  imports: [],
-  controllers: [AppController, ProductsController, OrdersController, SuppliersController],
+  imports: [AuthModule],
+  controllers: [AppController, AuthController, ProductsController, OrdersController, SuppliersController],
   providers: [AppService, ProductsService, OrdersService, SuppliersService],
 })
 export class AppModule { }
