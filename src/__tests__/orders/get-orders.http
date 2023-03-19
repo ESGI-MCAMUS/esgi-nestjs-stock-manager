@@ -1,0 +1,6 @@
+PATCH {{base_url}}/orders/1
+Content-Type: application/json
+
+{
+  "note": "This is a note."
+}
