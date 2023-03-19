@@ -5,6 +5,8 @@ import {
   HttpStatus,
   Logger,
 } from '@nestjs/common';
+import { OrdersAssociation } from 'src/orders/orders.model';
+import { OrdersService } from 'src/orders/orders.service';
 import { passwordService } from 'src/service/password/password.service';
 import { User } from './users.entity';
 import { CreateUser, UserSearch } from './users.model';
@@ -13,6 +15,7 @@ export class UsersService {
   constructor(
     @Inject('USERS_REPOSITORY')
     private readonly usersRepository: typeof User,
+    private readonly ordersService: OrdersService,
   ) {}
 
   async findAll(): Promise<User[]> {
@@ -25,6 +28,16 @@ export class UsersService {
 
   async findByEmail(email: string): Promise<User> {
     return this.usersRepository.findOne<User>({ where: { email } });
+  }
+
+  async getUsersOrders(id: number): Promise<OrdersAssociation[]> {
+    const user = await this.findOne(id);
+
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.ordersService.findByUser(id);
   }
 
   async create(user: CreateUser): Promise<User> {
