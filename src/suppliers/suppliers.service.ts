@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { Product } from 'src/products/products.entity';
 import { Supplier } from './suppliers.entity';
 import { CreateSupplier, SupplierSearch } from './suppliers.model';
 
@@ -10,17 +11,30 @@ export class SuppliersService {
   ) {}
 
   async findAll(): Promise<Supplier[]> {
-    return this.suppliersRepository.findAll<Supplier>();
+    return await this.suppliersRepository.findAll<Supplier>();
   }
 
   async findOne(id: number): Promise<Supplier> {
-    return this.suppliersRepository.findOne<Supplier>({ where: { id } });
+    return await this.suppliersRepository.findOne<Supplier>({
+      where: { id },
+    });
+  }
+
+  async getSuppliersProducts(id: number): Promise<Product[]> {
+    const supplier = await this.suppliersRepository.findOne<Supplier>({
+      where: { id },
+    });
+
+    if (!supplier) {
+      throw new HttpException('Supplier not found', HttpStatus.NOT_FOUND);
+    }
+
+    return await supplier.$get('products');
   }
 
   async create(supplier: CreateSupplier): Promise<Supplier> {
     if (
       !supplier.name ||
-      !supplier.description ||
       !supplier.address ||
       !supplier.phone ||
       !supplier.email
@@ -33,7 +47,6 @@ export class SuppliersService {
 
     const res = await this.suppliersRepository.create<Supplier>({
       name: supplier.name,
-      description: supplier.description,
       address: supplier.address,
       phone: supplier.phone,
       email: supplier.email,

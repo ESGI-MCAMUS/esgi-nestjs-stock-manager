@@ -9,6 +9,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { Product } from 'src/products/products.entity';
 import { Supplier } from './suppliers.entity';
 import {
   CreateSupplier,
@@ -31,8 +32,13 @@ export class SuppliersController {
   }
 
   @Get(':id')
-  findOne(@Param() id: number): Promise<Supplier> {
+  findOne(@Param('id') id: number): Promise<Supplier> {
     return this.suppliersService.findOne(id);
+  }
+
+  @Get(':id/products')
+  getSuppliersProducts(@Param('id') id: number): Promise<Product[]> {
+    return this.suppliersService.getSuppliersProducts(id);
   }
 
   @Post()
