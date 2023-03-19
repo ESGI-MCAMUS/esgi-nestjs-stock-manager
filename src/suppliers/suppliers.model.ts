@@ -4,7 +4,6 @@ import { Supplier } from './suppliers.entity';
 
 export interface CreateSupplier {
   name: string;
-  description: string;
   address: string;
   phone: string;
   email: string;
@@ -19,8 +18,6 @@ export class SupplierGetOne {
   @ApiProperty({ type: 'string', format: 'binary' })
   name: string;
   @ApiProperty({ type: 'string', format: 'binary' })
-  description: string;
-  @ApiProperty({ type: 'string', format: 'binary' })
   address: string;
   @ApiProperty({ type: 'string', format: 'binary' })
   phone: string;
@@ -34,8 +31,6 @@ export class SupplierCreate {
   @ApiProperty({ type: 'string', format: 'binary' })
   name: string;
   @ApiProperty({ type: 'string', format: 'binary' })
-  description: string;
-  @ApiProperty({ type: 'string', format: 'binary' })
   address: string;
   @ApiProperty({ type: 'string', format: 'binary' })
   phone: string;
@@ -48,8 +43,6 @@ export class SupplierCreate {
 export class SupplierUpdate {
   @ApiProperty({ type: 'string', format: 'binary' })
   name: string;
-  @ApiProperty({ type: 'string', format: 'binary' })
-  description: string;
   @ApiProperty({ type: 'string', format: 'binary' })
   address: string;
   @ApiProperty({ type: 'string', format: 'binary' })
