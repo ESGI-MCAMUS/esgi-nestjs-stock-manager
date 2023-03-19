@@ -1,24 +1,65 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Order } from './orders.entity';
-import { CreateOrder, OrderSearch } from './orders.model';
+import { Product } from 'src/products/products.entity';
+import { Order, OrdersProducts } from './orders.entity';
+import { CreateOrder, OrdersAssociation, OrderSearch } from './orders.model';
 
 @Injectable()
 export class OrdersService {
   constructor(
     @Inject('ORDERS_REPOSITORY')
     private readonly ordersRepository: typeof Order,
+    @Inject('ORDERS_PRODUCTS_REPOSITORY')
+    private readonly ordersProductsRepository: typeof OrdersProducts,
+    @Inject('PRODUCTS_REPOSITORY')
+    private readonly productsRepository: typeof Product,
   ) {}
 
-  async findAll(): Promise<Order[]> {
-    return this.ordersRepository.findAll<Order>();
+  async findAll(): Promise<OrdersAssociation[]> {
+    return this.ordersRepository.findAll<Order>({
+      include: [
+        {
+          model: this.productsRepository,
+          as: 'products',
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
   }
 
-  async findOne(id: number): Promise<Order> {
-    return this.ordersRepository.findOne<Order>({ where: { id } });
+  async findOne(id: number): Promise<OrdersAssociation> {
+    return await this.ordersRepository.findOne<Order>({
+      where: { id },
+      include: [
+        {
+          model: this.productsRepository,
+          as: 'products',
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+  }
+
+  async findByUser(id: number): Promise<OrdersAssociation[]> {
+    return await this.ordersRepository.findAll<Order>({
+      where: { orderedById: id },
+      include: [
+        {
+          model: this.productsRepository,
+          as: 'products',
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
   }
 
   async create(order: CreateOrder): Promise<Order> {
-    if (!order.orderedBy || !order.products) {
+    if (!order.orderedBy || !order.products || !order.note) {
       throw new HttpException(
         'Missing required fields',
         HttpStatus.BAD_REQUEST,
@@ -26,12 +67,20 @@ export class OrdersService {
     }
 
     const res = await this.ordersRepository.create<Order>({
-      orderedBy: order.orderedBy,
-      products: order.products,
+      orderedById: order.orderedBy,
+      note: order.note,
       createdAt: new Date(),
       updatedAt: new Date(),
       deletedAt: null,
     });
+
+    await order.products.map(
+      async (product) =>
+        await this.ordersProductsRepository.create<OrdersProducts>({
+          orderId: res.id,
+          productId: product,
+        }),
+    );
 
     return res;
   }
