@@ -9,6 +9,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { OrdersAssociation } from 'src/orders/orders.model';
 import { User } from './users.entity';
 import { CreateUser, UserSearch } from './users.model';
 import { UsersService } from './users.service';
@@ -28,6 +29,12 @@ export class UsersController {
   @HttpCode(200)
   findOne(@Param() id: number): Promise<User> {
     return this.usersService.findOne(id);
+  }
+
+  @Get(':id/orders')
+  @HttpCode(200)
+  getUsersOrders(@Param('id') id: number): Promise<OrdersAssociation[]> {
+    return this.usersService.getUsersOrders(id);
   }
 
   @Post()
