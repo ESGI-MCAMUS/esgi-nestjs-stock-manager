@@ -1,19 +1,30 @@
-import { Injectable, Inject, HttpException, HttpStatus, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  HttpException,
+  HttpStatus,
+  Logger,
+} from '@nestjs/common';
 import { passwordService } from 'src/service/password/password.service';
 import { User } from './users.entity';
-import { CreateUser, UserSearch } from './users.model'; @Injectable()
+import { CreateUser, UserSearch } from './users.model';
+@Injectable()
 export class UsersService {
   constructor(
     @Inject('USERS_REPOSITORY')
-    private usersRepository: typeof User,
-  ) { }
+    private readonly usersRepository: typeof User,
+  ) {}
 
   async findAll(): Promise<User[]> {
     return this.usersRepository.findAll<User>();
   }
 
-  async findOne(query: UserSearch): Promise<User> {
-    return this.usersRepository.findOne<User>({ where: { ...query } });
+  async findOne(id: number): Promise<User> {
+    return this.usersRepository.findOne<User>({ where: { id } });
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    return this.usersRepository.findOne<User>({ where: { email } });
   }
 
   async create(user: CreateUser): Promise<User> {

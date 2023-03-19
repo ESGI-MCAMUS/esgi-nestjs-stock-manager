@@ -24,10 +24,10 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get()
+  @Get(':id')
   @HttpCode(200)
-  findOne(@Body() query: UserSearch): Promise<User> {
-    return this.usersService.findOne(query as any);
+  findOne(@Param() id: number): Promise<User> {
+    return this.usersService.findOne(id);
   }
 
   @Post()
