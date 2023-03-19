@@ -1,10 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Product } from 'src/products/products.entity';
-import { User } from 'src/users/users.entity';
 import { Order } from './orders.entity';
 
 export interface CreateOrder {
-  orderedBy: User;
+  note: string;
+  orderedBy: number;
+  products: number[];
+}
+
+export interface OrdersAssociation extends Order {
   products: Product[];
 }
 
@@ -23,8 +27,8 @@ export class OrderCreate {
   @ApiProperty({ type: 'string', format: 'binary' })
   note: string;
   @ApiProperty({ type: 'number', format: 'binary' })
-  orderedById: number;
-  products: Product[];
+  orderedBy: number;
+  products: number[];
 }
 
 export class OrderUpdate {
