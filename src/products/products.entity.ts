@@ -22,7 +22,7 @@ export class Product extends Model {
   @Column
   ean13: string;
 
-  @Column
+  @Column({ type: 'FLOAT' })
   price: number;
 
   @ForeignKey(() => Supplier)
