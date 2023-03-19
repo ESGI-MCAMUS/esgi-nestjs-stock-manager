@@ -1,4 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
+import { Order, OrdersProducts } from 'src/orders/orders.entity';
+import { Product } from 'src/products/products.entity';
+import { Supplier } from 'src/suppliers/suppliers.entity';
 import { User } from 'src/users/users.entity';
 require('dotenv').config();
 
@@ -14,7 +17,7 @@ export const databaseProviders = [
         password: process.env.MYSQL_PASSWORD || 'root',
         database: process.env.MYSQL_DATABASE || 'nest',
       });
-      sequelize.addModels([User]);
+      sequelize.addModels([User, Supplier, Product, Order, OrdersProducts]);
       await sequelize.sync();
       return sequelize;
     },
