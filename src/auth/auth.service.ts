@@ -13,7 +13,7 @@ export class AuthService {
 
   async validateUser(email: string, pass: string): Promise<any> {
     try {
-      const user = await this.usersService.findOne({ email: email });
+      const user = await this.usersService.findByEmail(email);
       if (await passwordService.verify(pass, user.password)) {
         const { password, ...result } = user;
         return result;
@@ -25,13 +25,14 @@ export class AuthService {
 
   async login(req: LoginInterface) {
     try {
-      const user = await this.usersService.findOne({ email: req.email });
+      const user = await this.usersService.findByEmail(req.email);
       if (await passwordService.verify(req.password, user.password)) {
         const payload = {
           email: user,
           sub: user.id,
           firstname: user.firstname,
           lastname: user.lastname,
+          role: user.role,
         };
         return {
           access_token: this.jwtService.sign(payload),
