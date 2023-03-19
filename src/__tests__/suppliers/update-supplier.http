@@ -1,0 +1,7 @@
+
+PATCH {{base_url}}/suppliers/2
+content-type: application/json
+
+{
+  "name": "Hello WOrld!"
+}
