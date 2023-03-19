@@ -1,0 +1,7 @@
+PATCH {{base_url}}/products/16
+Content-Type: application/json
+
+{
+    "name": "New Product Name",
+    "price": 1000
+}
