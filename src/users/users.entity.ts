@@ -1,4 +1,6 @@
-import { Table, Column, Model } from 'sequelize-typescript';
+import { Table, Column, Model, HasOne, HasMany } from 'sequelize-typescript';
+import { Order } from 'src/orders/orders.entity';
+import { Supplier } from 'src/suppliers/suppliers.entity';
 
 @Table
 export class User extends Model {
@@ -16,6 +18,12 @@ export class User extends Model {
 
   @Column
   password: string;
+
+  @HasOne(() => Supplier)
+  supplier: Supplier;
+
+  @HasMany(() => Order)
+  orders: Order[];
 
   @Column
   createdAt: Date;
