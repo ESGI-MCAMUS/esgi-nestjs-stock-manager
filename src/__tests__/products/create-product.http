@@ -1,0 +1,10 @@
+POST {{base_url}}/products
+Content-Type: application/json
+
+{
+  "name": "Another Product",
+  "description": "This is a great product!",
+  "ean13": "0123456789",
+  "price": 10.99,
+  "supplierId": 3
+}
