@@ -9,9 +9,18 @@ import { SuppliersController } from './suppliers/suppliers.controller';
 import { SuppliersService } from './suppliers/suppliers.service';
 import { AuthModule } from './auth/auth.module';
 import { AuthController } from './auth/auth.controller';
+import { OrdersModule } from './orders/orders.module';
+import { ProductsModule } from './products/products.module';
+import { SuppliersModule } from './suppliers/suppliers.module';
 @Module({
-  imports: [AuthModule],
-  controllers: [AppController, AuthController, ProductsController, OrdersController, SuppliersController],
-  providers: [AppService, ProductsService, OrdersService, SuppliersService],
+  imports: [AuthModule, OrdersModule, ProductsModule, SuppliersModule],
+  controllers: [
+    AppController,
+    AuthController,
+    OrdersController,
+    ProductsController,
+    SuppliersController,
+  ],
+  providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
