@@ -1,10 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import * as Sentry from '@sentry/node';
 require('dotenv').config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+  });
 
   const config = new DocumentBuilder()
     .setTitle('ESGI Stock Manager')
