@@ -28,6 +28,8 @@
     "@nestjs/passport": "^9.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.2.1",
+    "@sentry/node": "^7.44.2",
+    "@sentry/tracing": "^7.44.2",
     "@types/passport-jwt": "^3.0.8",
     "@types/passport-local": "^1.0.35",
     "bcrypt": "^5.1.0",
