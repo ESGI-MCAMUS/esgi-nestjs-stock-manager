@@ -844,16 +844,6 @@
     consola "^2.15.0"
     node-fetch "^2.6.1"
 
-"@sentry-internal/tracing@7.44.2":
-  version "7.44.2"
-  resolved "https://registry.yarnpkg.com/@sentry-internal/tracing/-/tracing-7.44.2.tgz#d0cb9dcf88d68818c00d7cf42cddc8aa0ea89889"
-  integrity sha512-3nteYNWiQDbO4yROBqduWTVR0Jah+FiU/2Tz44FcWvWyBboRP4gggaN7BDJahRwbhcRQKE9lTjGCbQLgNOuUCw==
-  dependencies:
-    "@sentry/core" "7.44.2"
-    "@sentry/types" "7.44.2"
-    "@sentry/utils" "7.44.2"
-    tslib "^1.9.3"
-
 "@sentry/core@7.44.2":
   version "7.44.2"
   resolved "https://registry.yarnpkg.com/@sentry/core/-/core-7.44.2.tgz#e33b2880e83cc4aaaa3d1b8a160588484d0e2624"
@@ -875,13 +865,6 @@
     https-proxy-agent "^5.0.0"
     lru_map "^0.3.3"
     tslib "^1.9.3"
-
-"@sentry/tracing@^7.44.2":
-  version "7.44.2"
-  resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-7.44.2.tgz#92d9056b96a44e553e2fcec3ef0351ef820d956b"
-  integrity sha512-z8wqPgpaQ4EaxPRZdx4MEWfbySSpHlYO7URJPvudyhsezDr33kyZ79QYiZP3KexoHud7gsjnkI1u/DqjdEhDng==
-  dependencies:
-    "@sentry-internal/tracing" "7.44.2"
 
 "@sentry/types@7.44.2":
   version "7.44.2"
