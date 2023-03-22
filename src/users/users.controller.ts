@@ -7,8 +7,11 @@ import {
   Param,
   Patch,
   Post,
+  Logger,
+  UseGuards
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrdersAssociation } from 'src/orders/orders.model';
 import { User } from './users.entity';
 import { CreateUser, UserSearch } from './users.model';
@@ -16,8 +19,9 @@ import { UsersService } from './users.service';
 
 @ApiTags('Users')
 @Controller('users')
+@UseGuards(JwtAuthGuard)
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Get()
   @HttpCode(200)

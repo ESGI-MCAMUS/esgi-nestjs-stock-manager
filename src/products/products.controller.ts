@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { Product } from './products.entity';
@@ -17,11 +18,14 @@ import {
   ProductSearch,
 } from './products.model';
 import { ProductsService } from './products.service';
-
+import { RolesGuard } from 'src/roles/roles.guard';
+import { Roles } from 'src/roles/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 @ApiTags('Products')
 @Controller('products')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(private readonly productsService: ProductsService) { }
 
   @Get()
   async findAll(): Promise<Product[]> {
@@ -34,6 +38,7 @@ export class ProductsController {
   }
 
   @Post()
+  @Roles('SUPPLIER', 'ADMIN')
   @ApiBody({
     description: 'Create a product',
     type: ProductCreate,
@@ -44,6 +49,7 @@ export class ProductsController {
   }
 
   @Patch(':id')
+  @Roles('SUPPLIER', 'ADMIN')
   async update(
     @Param('id') id: number,
     @Body() product: Partial<Product>,
@@ -52,6 +58,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @Roles('SUPPLIER', 'ADMIN')
   @HttpCode(204)
   async delete(@Param('id') id: number): Promise<Product> {
     return this.productsService.delete(id);

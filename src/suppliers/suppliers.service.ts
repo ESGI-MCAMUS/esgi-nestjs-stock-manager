@@ -8,7 +8,7 @@ export class SuppliersService {
   constructor(
     @Inject('SUPPLIERS_REPOSITORY')
     private readonly suppliersRepository: typeof Supplier,
-  ) {}
+  ) { }
 
   async findAll(): Promise<Supplier[]> {
     return await this.suppliersRepository.findAll<Supplier>();
