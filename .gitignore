@@ -38,6 +38,7 @@ lerna-debug.log*
 .env
 
 package-lock.json
+yarn.lock
 
 config/config.json
 local.http

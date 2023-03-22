@@ -4,9 +4,6 @@ FROM node:18-alpine
 # Docker working directory
 WORKDIR /app
 
-# Install yarn
-# RUN npm i yarn -g
-
 # Copying file into APP directory of docker
 COPY package*.json .
 COPY yarn.lock .
@@ -19,4 +16,4 @@ COPY . .
 
 EXPOSE 3000
 
-# CMD ["npm", "run", "start:dev"]
+CMD ["yarn", "start:dev"]
