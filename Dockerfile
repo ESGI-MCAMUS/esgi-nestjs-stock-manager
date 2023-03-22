@@ -6,10 +6,9 @@ WORKDIR /app
 
 # Copying file into APP directory of docker
 COPY package*.json .
-COPY yarn.lock .
 
 # Then install the NPM module
-RUN yarn
+RUN yarn install
 
 # Copy current directory to APP folder
 COPY . .
