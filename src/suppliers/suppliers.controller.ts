@@ -7,9 +7,11 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { Product } from 'src/products/products.entity';
+import { Roles } from 'src/roles/roles.decorator';
 import { Supplier } from './suppliers.entity';
 import {
   CreateSupplier,
@@ -20,11 +22,13 @@ import {
   SupplierUpdate,
 } from './suppliers.model';
 import { SuppliersService } from './suppliers.service';
-
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RolesGuard } from 'src/roles/roles.guard';
 @ApiTags('Suppliers')
 @Controller('suppliers')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class SuppliersController {
-  constructor(private readonly suppliersService: SuppliersService) {}
+  constructor(private readonly suppliersService: SuppliersService) { }
 
   @Get()
   findAll(): Promise<Supplier[]> {
@@ -42,6 +46,7 @@ export class SuppliersController {
   }
 
   @Post()
+  @Roles('SUPPLIER', 'ADMIN')
   @ApiBody({
     description: 'Create a supplier',
     type: SupplierCreate,
@@ -52,12 +57,14 @@ export class SuppliersController {
   }
 
   @Delete(':id')
+  @Roles('SUPPLIER', 'ADMIN')
   @HttpCode(204)
   delete(@Param('id') id: number): Promise<Supplier> {
     return this.suppliersService.delete(id);
   }
 
   @Patch(':id')
+  @Roles('SUPPLIER', 'ADMIN')
   @ApiBody({
     description: 'Update a supplier',
     type: SupplierUpdate,

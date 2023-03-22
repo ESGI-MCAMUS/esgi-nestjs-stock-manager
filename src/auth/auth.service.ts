@@ -9,7 +9,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async validateUser(email: string, pass: string): Promise<any> {
     try {
@@ -45,7 +45,7 @@ export class AuthService {
 
   async register(user: CreateUser) {
     try {
-      await this.usersService.create(user);
+      return this.usersService.create(user);
     } catch (error) {
       throw error;
     }

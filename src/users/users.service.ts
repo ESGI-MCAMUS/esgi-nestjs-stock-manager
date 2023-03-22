@@ -9,14 +9,14 @@ import { OrdersAssociation } from 'src/orders/orders.model';
 import { OrdersService } from 'src/orders/orders.service';
 import { passwordService } from 'src/service/password/password.service';
 import { User } from './users.entity';
-import { CreateUser, UserSearch } from './users.model';
+import { CreateUser, UserRoles, UserSearch } from './users.model';
 @Injectable()
 export class UsersService {
   constructor(
     @Inject('USERS_REPOSITORY')
     private readonly usersRepository: typeof User,
     private readonly ordersService: OrdersService,
-  ) {}
+  ) { }
 
   async findAll(): Promise<User[]> {
     return this.usersRepository.findAll<User>();
@@ -57,19 +57,23 @@ export class UsersService {
       throw new HttpException('Email already in use', HttpStatus.BAD_REQUEST);
     }
 
+    const checkUserRole = (role) => {
+      if (UserRoles[role]) {
+        return UserRoles[role];
+      }
+      throw new HttpException('Incorrect role', HttpStatus.BAD_REQUEST);
+    }
     // Create user
-    const res = await this.usersRepository.create<User>({
+    return this.usersRepository.create<User>({
       firstname: user.firstname,
       lastname: user.lastname,
-      role: 'USER',
+      role: user.role ? checkUserRole(user.role) : UserRoles.USER,
       email: user.email,
       password: await passwordService.hash(user.password),
       createdAt: new Date(),
       updatedAt: new Date(),
       deletedAt: null,
     });
-
-    return res;
   }
 
   async update(id: number, user: Partial<User>): Promise<User> {
@@ -98,7 +102,7 @@ export class UsersService {
       );
     }
 
-    return await this.usersRepository.findOne<User>({ where: { id } });
+    return this.usersRepository.findOne<User>({ where: { id } });
   }
 
   async delete(id: number): Promise<User> {
