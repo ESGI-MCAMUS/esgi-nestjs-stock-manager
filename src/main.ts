@@ -18,6 +18,7 @@ async function bootstrap() {
     .setTitle('ESGI Stock Manager')
     .setDescription('Project for the ESGI course NestJS & TypeScript')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

@@ -28,10 +28,7 @@ export class AuthService {
       const user = await this.usersService.findByEmail(req.email);
       if (await passwordService.verify(req.password, user.password)) {
         const payload = {
-          email: user,
-          sub: user.id,
-          firstname: user.firstname,
-          lastname: user.lastname,
+          id: user.id,
           role: user.role,
         };
         return {
