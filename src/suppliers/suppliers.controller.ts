@@ -9,7 +9,7 @@ import {
   Post,
   UseGuards
 } from '@nestjs/common';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { Product } from 'src/products/products.entity';
 import { Roles } from 'src/roles/roles.decorator';
 import { Supplier } from './suppliers.entity';
@@ -25,6 +25,7 @@ import { SuppliersService } from './suppliers.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/roles/roles.guard';
 @ApiTags('Suppliers')
+@ApiBearerAuth()
 @Controller('suppliers')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class SuppliersController {

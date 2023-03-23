@@ -9,7 +9,7 @@ import {
   Post,
   UseGuards
 } from '@nestjs/common';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { Product } from './products.entity';
 import {
   ProductCreate,
@@ -22,6 +22,7 @@ import { RolesGuard } from 'src/roles/roles.guard';
 import { Roles } from 'src/roles/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 @ApiTags('Products')
+@ApiBearerAuth()
 @Controller('products')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class ProductsController {
