@@ -2,12 +2,13 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as Sentry from '@sentry/node';
+import helmet from 'helmet';
 import * as compression from 'compression';
 
 require('dotenv').config();
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
@@ -22,6 +23,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
+  app.use(helmet());
   app.use(compression());
   await app.listen(Number(process.env.APP_PORT) ?? 3000);
 }
