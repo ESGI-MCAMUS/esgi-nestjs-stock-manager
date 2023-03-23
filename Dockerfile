@@ -1,5 +1,5 @@
 # Image source
-FROM node:18-alpine
+FROM node:18
 
 # Docker working directory
 WORKDIR /app
@@ -8,7 +8,9 @@ WORKDIR /app
 COPY package*.json .
 
 # Then install the NPM module
-RUN yarn install
+RUN apt-get update && \
+    apt-get install -y default-mysql-client && \
+    yarn install
 
 # Copy current directory to APP folder
 COPY . .
