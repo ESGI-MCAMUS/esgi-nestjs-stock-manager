@@ -11,8 +11,10 @@ import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { HttpExceptionFilter } from '../middleware/sentry.middleware';
+import { ScheduleModule } from '@nestjs/schedule';
+import { DatabaseBackupService } from './db-backup/db-backup.service';
 @Module({
-  imports: [AuthModule, OrdersModule, ProductsModule, SuppliersModule],
+  imports: [AuthModule, OrdersModule, ProductsModule, SuppliersModule, ScheduleModule.forRoot()],
   controllers: [
     AppController,
     AuthController,
@@ -20,7 +22,9 @@ import { HttpExceptionFilter } from '../middleware/sentry.middleware';
     ProductsController,
     SuppliersController,
   ],
-  providers: [AppService,
+  providers: [
+    AppService,
+    DatabaseBackupService,
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
