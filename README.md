@@ -47,3 +47,11 @@ If you want to reset the data in the database, you can run the following command
 ```bash
 $ yarn db:reset
 ```
+
+## 🙋‍♂️ Test users and passwords
+
+| Email                | Password | Role     |
+| -------------------- | -------- | -------- |
+| user@example.com     | user     | USER     |
+| supplier@example.com | supplier | SUPPLIER |
+| admin@example.com    | admin    | ADMIN    |
