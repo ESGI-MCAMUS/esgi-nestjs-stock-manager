@@ -35,10 +35,15 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.env
 
+
+# Lock files
 package-lock.json
 yarn.lock
 
+# Dumps
+/sql-dumps
+
+# Misc
 config/config.json
 local.http
