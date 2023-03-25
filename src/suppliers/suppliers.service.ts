@@ -20,6 +20,12 @@ export class SuppliersService {
     });
   }
 
+  async findSupplierByUserId(id: number): Promise<Supplier> {
+    return await this.suppliersRepository.findOne<Supplier>({
+      where: { userId: id },
+    });
+  }
+
   async getSuppliersProducts(id: number): Promise<Product[]> {
     const supplier = await this.suppliersRepository.findOne<Supplier>({
       where: { id },
