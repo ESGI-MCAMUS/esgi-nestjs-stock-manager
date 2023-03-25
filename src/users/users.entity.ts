@@ -22,7 +22,11 @@ export class User extends Model {
   @HasOne(() => Supplier)
   supplier: Supplier;
 
-  @HasMany(() => Order)
+  @HasMany(() => Order, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    hooks: true,
+  })
   orders: Order[];
 
   @Column

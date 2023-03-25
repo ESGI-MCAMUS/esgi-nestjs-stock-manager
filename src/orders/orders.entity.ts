@@ -1,10 +1,12 @@
 import {
+  AutoIncrement,
   BelongsTo,
   BelongsToMany,
   Column,
   ForeignKey,
   HasMany,
   Model,
+  PrimaryKey,
   Table,
 } from 'sequelize-typescript';
 import { Product } from 'src/products/products.entity';
@@ -37,6 +39,10 @@ export class Order extends Model {
 
 @Table
 export class OrdersProducts extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
   @ForeignKey(() => Order)
   @Column
   orderId: number;
