@@ -82,7 +82,10 @@ export class SuppliersService {
       throw new HttpException('Supplier not found', HttpStatus.NOT_FOUND);
     }
 
-    supplierToDelete.destroy();
+
+    await supplierToDelete.destroy().catch((err) => {
+      console.log(err);
+    });
 
     return supplierToDelete;
   }
