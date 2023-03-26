@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import * as Sentry from '@sentry/node';
 import helmet from 'helmet';
 import * as compression from 'compression';
+import {VersioningType} from "@nestjs/common";
 
 require('dotenv').config();
 
@@ -26,6 +27,11 @@ async function bootstrap() {
 
   app.use(helmet());
   app.use(compression());
+  app.enableVersioning({
+    type: VersioningType.URI,
+    defaultVersion: '1'
+  });
+
   await app.listen(Number(process.env.APP_PORT) ?? 3000);
 }
 bootstrap();
