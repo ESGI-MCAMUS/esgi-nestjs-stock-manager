@@ -30,7 +30,11 @@ export class Supplier extends Model {
   @BelongsTo(() => User)
   user: User;
 
-  @HasMany(() => Product)
+  @HasMany(() => Product, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    hooks: true,
+  })
   products: Product[];
 
   @Column({ defaultValue: new Date() })

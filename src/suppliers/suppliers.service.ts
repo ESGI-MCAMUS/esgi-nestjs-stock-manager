@@ -20,6 +20,12 @@ export class SuppliersService {
     });
   }
 
+  async findSupplierByUserId(id: number): Promise<Supplier> {
+    return await this.suppliersRepository.findOne<Supplier>({
+      where: { userId: id },
+    });
+  }
+
   async getSuppliersProducts(id: number): Promise<Product[]> {
     const supplier = await this.suppliersRepository.findOne<Supplier>({
       where: { id },
@@ -82,7 +88,10 @@ export class SuppliersService {
       throw new HttpException('Supplier not found', HttpStatus.NOT_FOUND);
     }
 
-    supplierToDelete.destroy();
+
+    await supplierToDelete.destroy().catch((err) => {
+      console.log(err);
+    });
 
     return supplierToDelete;
   }

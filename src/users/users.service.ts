@@ -8,6 +8,8 @@ import {
 import { OrdersAssociation } from 'src/orders/orders.model';
 import { OrdersService } from 'src/orders/orders.service';
 import { passwordService } from 'src/service/password/password.service';
+import { Supplier } from 'src/suppliers/suppliers.entity';
+import { SuppliersService } from 'src/suppliers/suppliers.service';
 import { User } from './users.entity';
 import { CreateUser, UserRoles, UserSearch } from './users.model';
 @Injectable()
@@ -16,6 +18,7 @@ export class UsersService {
     @Inject('USERS_REPOSITORY')
     private readonly usersRepository: typeof User,
     private readonly ordersService: OrdersService,
+    private readonly suppliersService: SuppliersService,
   ) { }
 
   async findAll(): Promise<User[]> {
@@ -38,6 +41,17 @@ export class UsersService {
     }
 
     return this.ordersService.findByUser(id);
+  }
+
+  async getUsersSupplier(id: number): Promise<Supplier> {
+    const user = await this.findOne(id);
+
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.suppliersService.findSupplierByUserId(id);
+
   }
 
   async create(user: CreateUser): Promise<User> {

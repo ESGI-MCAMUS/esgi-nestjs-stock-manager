@@ -40,7 +40,6 @@ export class OrdersController {
   }
 
   @Post()
-  @Roles('SUPPLIER', 'ADMIN')
   @ApiBody({
     description: 'Create an order',
     type: OrderCreate,

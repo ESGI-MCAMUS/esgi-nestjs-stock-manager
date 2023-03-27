@@ -12,7 +12,7 @@ export class OrdersService {
     private readonly ordersProductsRepository: typeof OrdersProducts,
     @Inject('PRODUCTS_REPOSITORY')
     private readonly productsRepository: typeof Product,
-  ) {}
+  ) { }
 
   async findAll(): Promise<OrdersAssociation[]> {
     return this.ordersRepository.findAll<Order>({
@@ -79,7 +79,10 @@ export class OrdersService {
         await this.ordersProductsRepository.create<OrdersProducts>({
           orderId: res.id,
           productId: product,
-        }),
+        }).catch((err) => {
+          console.log(err);
+        })
+      ,
     );
 
     return res;

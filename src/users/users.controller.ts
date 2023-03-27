@@ -14,6 +14,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrdersAssociation } from 'src/orders/orders.model';
 import { Roles } from 'src/roles/roles.decorator';
+import { Supplier } from 'src/suppliers/suppliers.entity';
 import { User } from './users.entity';
 import { CreateUser, UserSearch } from './users.model';
 import { UsersService } from './users.service';
@@ -42,6 +43,13 @@ export class UsersController {
   @Roles('USER', 'ADMIN', 'SUPPLIER')
   getUsersOrders(@Param('id') id: number): Promise<OrdersAssociation[]> {
     return this.usersService.getUsersOrders(id);
+  }
+
+  @Get(':id/supplier')
+  @HttpCode(200)
+  @Roles('USER', 'ADMIN', 'SUPPLIER')
+  getUsersSupplier(@Param('id') id: number): Promise<Supplier> {
+    return this.usersService.getUsersSupplier(id);
   }
 
   @Post()

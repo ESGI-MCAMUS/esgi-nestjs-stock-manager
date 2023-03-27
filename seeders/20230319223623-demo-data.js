@@ -9,6 +9,42 @@ module.exports = {
     const products = [];
     const orders = [];
 
+    const admin = {
+      firstname: 'Admin',
+      lastname: 'Admin',
+      email: 'admin@example.com',
+      password: '$2b$10$8fmWNRqrtJ.Jk9gxC0Ux0.LfbBN7cM6.Q10E7dLiWliMN0lKOWNSW',
+      role: 'ADMIN',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    users.push(admin);
+
+    const supplier = {
+      firstname: 'Supplier',
+      lastname: 'Supplier',
+      email: 'supplier@example.com',
+      password: '$2b$10$wWF6oCM0DAfRdj9zj8ZJwugVPNnKS/qv7UWJhYu.KUhWZnTMzefDO',
+      role: 'SUPPLIER',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    users.push(supplier);
+
+    const user = {
+      firstname: 'User',
+      lastname: 'User',
+      email: 'user@example.com',
+      password: '$2b$10$b003G83eKsC3wzCdLrBn/eSW/V70SG.blex/URlR4IC42UA95ya2e',
+      role: 'USER',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    users.push(user);
+
     for (let i = 0; i < 10; i++) {
       users.push({
         firstname: faker.name.firstName(),
@@ -34,7 +70,7 @@ module.exports = {
       });
     }
 
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 20; i++) {
       const randomSupplier = randomIntFromInterval(1, 10);
       products.push({
         name: faker.commerce.productName(),
@@ -47,7 +83,7 @@ module.exports = {
       });
     }
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 10; i++) {
       const randomUser = randomIntFromInterval(1, 10);
       // Randomly select multiple products
       const productIds = [];
