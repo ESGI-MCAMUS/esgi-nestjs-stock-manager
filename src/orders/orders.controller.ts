@@ -6,7 +6,7 @@ import {
   Param,
   Patch,
   Post,
-  UseGuards
+  UseGuards, Version
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -31,6 +31,12 @@ export class OrdersController {
 
   @Get()
   async findAll() {
+    return this.ordersService.findAll();
+  }
+
+  @Version('2')
+  @Get()
+  async findAllv2() {
     return this.ordersService.findAll();
   }
 
