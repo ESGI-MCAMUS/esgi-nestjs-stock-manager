@@ -1,6 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Product } from 'src/products/products.entity';
 import { Order } from './orders.entity';
+import { IsNotEmpty, IsNumberString } from 'class-validator';
 
 export interface CreateOrder {
   note: string;
@@ -16,8 +17,10 @@ export type OrderSearch = Partial<Order>;
 
 export class OrderGetOne {
   @ApiProperty({ type: 'number', format: 'binary' })
+  @IsNumberString()
   id: number;
   @ApiProperty({ type: 'string', format: 'binary' })
+  @IsNotEmpty()
   note: string;
   @ApiProperty({ type: 'number', format: 'binary' })
   orderedById: number;
@@ -25,18 +28,14 @@ export class OrderGetOne {
 
 export class OrderCreate {
   @ApiProperty({ type: 'string', format: 'binary' })
+  @IsNotEmpty()
   note: string;
   @ApiProperty({ type: 'number', format: 'binary' })
   orderedBy: number;
   products: number[];
 }
 
-export class OrderUpdate {
-  @ApiProperty({ type: 'string', format: 'binary' })
-  note: string;
-  @ApiProperty({ type: 'number', format: 'binary' })
-  orderedBy: number;
-}
+export class OrderUpdate extends PartialType(OrderCreate) { }
 
 export class OrderDelete {
   @ApiProperty({ type: 'number', format: 'binary' })
