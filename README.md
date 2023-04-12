@@ -47,6 +47,8 @@ $ docker build -t nestjs .
 $ docker compose up -d
 ```
 
+The backend should be available at `http://localhost:3000` and the front at `http://localhost:5173`.
+
 ## 🗃️ Seeding the database
 
 First, you need to fill the `/config/config.json` file with your database credentials. Use the `config-example.json` file as a template.
