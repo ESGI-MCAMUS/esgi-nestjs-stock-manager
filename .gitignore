@@ -47,3 +47,5 @@ yarn.lock
 # Misc
 config/config.json
 local.http
+
+.env.dev
