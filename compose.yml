@@ -10,7 +10,8 @@ services:
       - '${MYSQL_PORT}'
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD="root"
       - MYSQL_USER=${MYSQL_USER}
     container_name: mariadb
     volumes:
