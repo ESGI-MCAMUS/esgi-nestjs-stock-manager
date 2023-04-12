@@ -24,6 +24,21 @@ $ yarn start:prod
 
 ### 🐳 Using Docker
 
+Fill correctly the `.env` file:
+
+```
+MYSQL_HOST="localhost"
+MYSQL_DATABASE="database"
+MYSQL_USER="root"
+MYSQL_PASSWORD="root"
+MYSQL_ROOT_PASSWORD="root"
+MYSQL_PORT="3306"
+APP_PORT="3000"
+JWT_SECRET="jwt-dev-key"
+NODE_ENV="development"
+SENTRY_DSN="https://1c5a2cbfbacf4587bd769579257308bc@o4504878636204032.ingest.sentry.io/4504878643675136"
+```
+
 ```bash
 # build the image
 $ docker build -t nestjs .
@@ -55,3 +70,11 @@ $ yarn db:reset
 | user@example.com     | user     | USER     |
 | supplier@example.com | supplier | SUPPLIER |
 | admin@example.com    | admin    | ADMIN    |
+
+## 🪲 Known issue
+
+If you have an error with Bcrypt when you try to start the container, you can try to run the following command:
+
+```bash
+docker compose exec nestjs npm rebuild bcrypt --build-from-source
+```
