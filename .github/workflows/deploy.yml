@@ -1,9 +1,9 @@
-name: 💻 Deploy to dev
+name: 💻 Deploy to prod
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
