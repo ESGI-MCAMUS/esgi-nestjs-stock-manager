@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import {APP_FILTER, APP_GUARD} from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsController } from './products/products.controller';
@@ -13,37 +13,37 @@ import { SuppliersModule } from './suppliers/suppliers.module';
 import { HttpExceptionFilter } from '../middleware/sentry.middleware';
 import { ScheduleModule } from '@nestjs/schedule';
 import { DatabaseBackupService } from './db-backup/db-backup.service';
-import {ThrottlerGuard, ThrottlerModule} from '@nestjs/throttler';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 @Module({
-  imports: [
-    AuthModule,
-    OrdersModule,
-    ProductsModule,
-    SuppliersModule,
-    ScheduleModule.forRoot(),
-    ThrottlerModule.forRoot({
-      ttl: 60,
-      limit: 10,
-    }),
-  ],
-  controllers: [
-    AppController,
-    AuthController,
-    OrdersController,
-    ProductsController,
-    SuppliersController,
-  ],
-  providers: [
-    AppService,
-    DatabaseBackupService,
-    {
-      provide: APP_FILTER,
-      useClass: HttpExceptionFilter,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: ThrottlerGuard
-    }
-  ],
+    imports: [
+        AuthModule,
+        OrdersModule,
+        ProductsModule,
+        SuppliersModule,
+        ScheduleModule.forRoot(),
+        ThrottlerModule.forRoot({
+            ttl: 60,
+            limit: 10,
+        }),
+    ],
+    controllers: [
+        AppController,
+        AuthController,
+        OrdersController,
+        ProductsController,
+        SuppliersController,
+    ],
+    providers: [
+        AppService,
+        DatabaseBackupService,
+        {
+            provide: APP_FILTER,
+            useClass: HttpExceptionFilter,
+        },
+        {
+            provide: APP_GUARD,
+            useClass: ThrottlerGuard
+        }
+    ],
 })
 export class AppModule { }

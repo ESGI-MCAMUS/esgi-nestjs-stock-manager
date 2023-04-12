@@ -1,7 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { User } from 'src/users/users.entity';
 import { Supplier } from './suppliers.entity';
-import { IsNumberString, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsNumberString, IsEmail, IsNotEmpty, IsString, IsPhoneNumber } from 'class-validator';
 export interface CreateSupplier {
     name: string;
     address: string;
@@ -26,6 +26,7 @@ export class SupplierGetOne {
     @IsString()
     address: string;
     @ApiProperty({ type: 'string', format: 'binary' })
+    @IsPhoneNumber()
     phone: string;
     @ApiProperty({ type: 'string', format: 'binary' })
     @IsEmail()
@@ -46,6 +47,7 @@ export class SupplierCreate {
     address: string;
     @ApiProperty({ type: 'string', format: 'binary' })
     @IsString()
+    @IsPhoneNumber()
     phone: string;
     @ApiProperty({ type: 'string', format: 'binary' })
     @IsEmail()
