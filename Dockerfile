@@ -15,6 +15,9 @@ RUN apt-get update && \
 # Copy current directory to APP folder
 COPY . .
 
+COPY ./.env.dev ./.env
+
 EXPOSE 3000
+EXPOSE 3306
 
 CMD ["yarn", "start:dev"]

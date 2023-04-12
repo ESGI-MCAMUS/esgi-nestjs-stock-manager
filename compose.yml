@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: mysql
+    image: mariadb
     restart: always
     ports:
       - '${MYSQL_PORT}:${MYSQL_PORT}'
@@ -12,7 +12,7 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
-    container_name: mysql
+    container_name: mariadb
     volumes:
       - db:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -29,6 +29,14 @@ services:
       - db
     volumes:
       - .:/app
+
+  react-front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    image: react-app
+    ports:
+      - '5173:5173'
 
   adminer:
     image: adminer
