@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UseGuards
@@ -34,7 +35,7 @@ export class ProductsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Product> {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Product> {
     return this.productsService.findOne(id);
   }
 
@@ -52,7 +53,7 @@ export class ProductsController {
   @Patch(':id')
   @Roles('SUPPLIER', 'ADMIN')
   async update(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @Body() product: Partial<Product>,
   ): Promise<Product> {
     return this.productsService.update(id, product);
@@ -61,7 +62,7 @@ export class ProductsController {
   @Delete(':id')
   @Roles('SUPPLIER', 'ADMIN')
   @HttpCode(204)
-  async delete(@Param('id') id: number): Promise<Product> {
+  async delete(@Param('id', ParseIntPipe) id: number): Promise<Product> {
     return this.productsService.delete(id);
   }
 }

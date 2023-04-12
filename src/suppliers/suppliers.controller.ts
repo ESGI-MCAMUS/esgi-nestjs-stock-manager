@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UseGuards
@@ -37,12 +38,12 @@ export class SuppliersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Promise<Supplier> {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Supplier> {
     return this.suppliersService.findOne(id);
   }
 
   @Get(':id/products')
-  getSuppliersProducts(@Param('id') id: number): Promise<Product[]> {
+  getSuppliersProducts(@Param('id', ParseIntPipe) id: number): Promise<Product[]> {
     return this.suppliersService.getSuppliersProducts(id);
   }
 
@@ -60,7 +61,7 @@ export class SuppliersController {
   @Delete(':id')
   @Roles('SUPPLIER', 'ADMIN')
   @HttpCode(204)
-  delete(@Param('id') id: number): Promise<Supplier> {
+  delete(@Param('id', ParseIntPipe) id: number): Promise<Supplier> {
     return this.suppliersService.delete(id);
   }
 
@@ -72,7 +73,7 @@ export class SuppliersController {
   })
   @HttpCode(200)
   update(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @Body() supplier: Partial<Supplier>,
   ): Promise<Supplier> {
     return this.suppliersService.update(id, supplier);

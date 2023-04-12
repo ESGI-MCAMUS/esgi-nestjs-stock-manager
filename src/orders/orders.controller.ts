@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UseGuards, Version
@@ -41,7 +42,7 @@ export class OrdersController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number) {
+  async findOne(@Param('id', ParseIntPipe) id: number) {
     return this.ordersService.findOne(id);
   }
 
@@ -56,13 +57,13 @@ export class OrdersController {
 
   @Patch(':id')
   @Roles('SUPPLIER', 'ADMIN')
-  async update(@Param('id') id: number, @Body() order: Partial<Order>) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() order: Partial<Order>) {
     return this.ordersService.update(id, order);
   }
 
   @Delete(':id')
   @Roles('SUPPLIER', 'ADMIN')
-  async delete(@Param('id') id: number) {
+  async delete(@Param('id', ParseIntPipe) id: number) {
     return this.ordersService.delete(id);
   }
 }
