@@ -30,6 +30,7 @@ services:
       - db
     volumes:
       - .:/app
+      - /app/node_modules
 
   react-front:
     build:
