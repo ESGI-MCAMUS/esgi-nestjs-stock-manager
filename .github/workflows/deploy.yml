@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 18.x
       - name: 💾 Install dependencies
-        run: yarn
+        run: npm install
       - name: ⚙️ Build `.env` file
         env:
           DOT_ENV: ${{ secrets.DOT_ENV }}
