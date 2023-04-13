@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UseGuards
@@ -21,6 +22,7 @@ import { ProductsService } from './products.service';
 import { RolesGuard } from 'src/roles/roles.guard';
 import { Roles } from 'src/roles/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { CreateProductPipe, UpdateProductPipe } from './products.validation.pipe';
 @ApiTags('Products')
 @ApiBearerAuth()
 @Controller('products')
@@ -34,7 +36,7 @@ export class ProductsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Product> {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Product> {
     return this.productsService.findOne(id);
   }
 
@@ -45,15 +47,15 @@ export class ProductsController {
     type: ProductCreate,
   })
   @HttpCode(201)
-  async create(@Body() product: ProductCreate): Promise<Product> {
+  async create(@Body(CreateProductPipe) product: ProductCreate): Promise<Product> {
     return this.productsService.create(product);
   }
 
   @Patch(':id')
   @Roles('SUPPLIER', 'ADMIN')
   async update(
-    @Param('id') id: number,
-    @Body() product: Partial<Product>,
+    @Param('id', ParseIntPipe) id: number,
+    @Body(UpdateProductPipe) product: Partial<Product>,
   ): Promise<Product> {
     return this.productsService.update(id, product);
   }
@@ -61,7 +63,7 @@ export class ProductsController {
   @Delete(':id')
   @Roles('SUPPLIER', 'ADMIN')
   @HttpCode(204)
-  async delete(@Param('id') id: number): Promise<Product> {
+  async delete(@Param('id', ParseIntPipe) id: number): Promise<Product> {
     return this.productsService.delete(id);
   }
 }

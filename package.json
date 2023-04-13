@@ -51,7 +51,8 @@
     "sequelize": "^6.29.3",
     "sequelize-cli": "^6.6.0",
     "sequelize-typescript": "^2.1.5",
-    "typeorm": "^0.3.12"
+    "typeorm": "^0.3.12",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",

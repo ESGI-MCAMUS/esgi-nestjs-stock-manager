@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UseGuards
@@ -24,6 +25,7 @@ import {
 import { SuppliersService } from './suppliers.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/roles/roles.guard';
+import { CreateSupplierPipe, UpdateSupplierPipe } from './suppliers.validation.pipe';
 @ApiTags('Suppliers')
 @ApiBearerAuth()
 @Controller('suppliers')
@@ -37,12 +39,12 @@ export class SuppliersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Promise<Supplier> {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Supplier> {
     return this.suppliersService.findOne(id);
   }
 
   @Get(':id/products')
-  getSuppliersProducts(@Param('id') id: number): Promise<Product[]> {
+  getSuppliersProducts(@Param('id', ParseIntPipe) id: number): Promise<Product[]> {
     return this.suppliersService.getSuppliersProducts(id);
   }
 
@@ -53,14 +55,14 @@ export class SuppliersController {
     type: SupplierCreate,
   })
   @HttpCode(201)
-  create(@Body() supplier: CreateSupplier): Promise<Supplier> {
+  create(@Body(CreateSupplierPipe) supplier: CreateSupplier): Promise<Supplier> {
     return this.suppliersService.create(supplier);
   }
 
   @Delete(':id')
   @Roles('SUPPLIER', 'ADMIN')
   @HttpCode(204)
-  delete(@Param('id') id: number): Promise<Supplier> {
+  delete(@Param('id', ParseIntPipe) id: number): Promise<Supplier> {
     return this.suppliersService.delete(id);
   }
 
@@ -72,8 +74,8 @@ export class SuppliersController {
   })
   @HttpCode(200)
   update(
-    @Param('id') id: number,
-    @Body() supplier: Partial<Supplier>,
+    @Param('id', ParseIntPipe) id: number,
+    @Body(UpdateSupplierPipe) supplier: Partial<Supplier>,
   ): Promise<Supplier> {
     return this.suppliersService.update(id, supplier);
   }
