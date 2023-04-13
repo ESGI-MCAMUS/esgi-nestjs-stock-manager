@@ -1,10 +1,10 @@
 import { Controller, UseGuards, Post, HttpCode, Body } from '@nestjs/common';
 import { LocalAuthGuard } from './local-auth.guard';
 import { AuthService } from './auth.service';
-import { CreateUser, UserRoles } from 'src/users/users.model';
+import { CreateUser, UserRoles } from '../users/users.model';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { AuthLogin, AuthRegister, LoginInterface } from './auth.model';
-import { CreateUserPipe, LoginUserPipe } from 'src/users/users.validation.pipe';
+import { CreateUserPipe, LoginUserPipe } from '../users/users.validation.pipe';
 
 @ApiTags('Authentication')
 @Controller('auth')

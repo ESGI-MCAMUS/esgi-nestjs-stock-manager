@@ -11,8 +11,8 @@ import {
   UseGuards
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
-import { Product } from 'src/products/products.entity';
-import { Roles } from 'src/roles/roles.decorator';
+import { Product } from '../products/products.entity';
+import { Roles } from '../roles/roles.decorator';
 import { Supplier } from './suppliers.entity';
 import {
   CreateSupplier,
@@ -23,8 +23,8 @@ import {
   SupplierUpdate,
 } from './suppliers.model';
 import { SuppliersService } from './suppliers.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RolesGuard } from 'src/roles/roles.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../roles/roles.guard';
 import { CreateSupplierPipe, UpdateSupplierPipe } from './suppliers.validation.pipe';
 @ApiTags('Suppliers')
 @ApiBearerAuth()

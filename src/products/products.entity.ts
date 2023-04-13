@@ -8,8 +8,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Order, OrdersProducts } from 'src/orders/orders.entity';
-import { Supplier } from 'src/suppliers/suppliers.entity';
+import { Order, OrdersProducts } from '../orders/orders.entity';
+import { Supplier } from '../suppliers/suppliers.entity';
 
 @Table
 export class Product extends Model {

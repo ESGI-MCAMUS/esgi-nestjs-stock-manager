@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Product } from 'src/products/products.entity';
+import { Product } from '../products/products.entity';
 import { Supplier } from './suppliers.entity';
 import { CreateSupplier, SupplierSearch } from './suppliers.model';
 
