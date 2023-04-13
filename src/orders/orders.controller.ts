@@ -22,7 +22,7 @@ import {
   OrderUpdate,
 } from './orders.model';
 import { OrdersService } from './orders.service';
-
+import { CreateOrderPipe, UpdateOrderPipe } from './orders.validation.pipe';
 @ApiTags('Orders')
 @ApiBearerAuth()
 @Controller('orders')
@@ -51,13 +51,13 @@ export class OrdersController {
     description: 'Create an order',
     type: OrderCreate,
   })
-  async create(@Body() order: CreateOrder) {
+  async create(@Body(CreateOrderPipe) order: CreateOrder) {
     return this.ordersService.create(order);
   }
 
   @Patch(':id')
   @Roles('SUPPLIER', 'ADMIN')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() order: Partial<Order>) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body(UpdateOrderPipe) order: Partial<Order>) {
     return this.ordersService.update(id, order);
   }
 

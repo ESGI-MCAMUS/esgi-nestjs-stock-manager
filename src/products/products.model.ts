@@ -14,22 +14,14 @@ export type ProductSearch = Partial<Product>;
 
 export class ProductGetOne {
   @ApiProperty({ type: 'number', format: 'binary' })
-  @IsNotEmpty()
-  @IsNumberString()
   id: number;
   @ApiProperty({ type: 'string', format: 'binary' })
-  @IsNotEmpty()
-  @IsString()
   name: string;
   @ApiProperty({ type: 'string', format: 'binary' })
-  @IsString()
   description: string;
   @ApiProperty({ type: 'string', format: 'binary' })
-  @IsString()
-  @IsEAN()
   ean13: string;
   @ApiProperty({ type: 'number', format: 'binary' })
-  @IsNumber()
   price: number;
   @ApiProperty({ type: 'number', format: 'binary' })
   supplierId: number;
@@ -37,18 +29,13 @@ export class ProductGetOne {
 
 export class ProductCreate {
   @ApiProperty({ type: 'string', format: 'binary' })
-  @IsString()
-  @IsNotEmpty()
   name: string;
   @ApiProperty({ type: 'string', format: 'binary' })
-  @IsString()
-  @IsNotEmpty()
   description: string;
   @ApiProperty({ type: 'string', format: 'binary' })
   @IsEAN()
   ean13: string;
   @ApiProperty({ type: 'number', format: 'binary' })
-  @IsNumber()
   price: number;
   @ApiProperty({ type: 'number', format: 'binary' })
   supplierId: number;

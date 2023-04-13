@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { CreateUser, UserRoles } from 'src/users/users.model';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { AuthLogin, AuthRegister, LoginInterface } from './auth.model';
+import { CreateUserPipe, LoginUserPipe } from 'src/users/users.validation.pipe';
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -17,7 +18,7 @@ export class AuthController {
     type: AuthLogin,
   })
   @HttpCode(200)
-  async login(@Body() body: LoginInterface) {
+  async login(@Body(LoginUserPipe) body: LoginInterface) {
     return this.authService.login(body);
   }
 
@@ -27,7 +28,7 @@ export class AuthController {
     type: AuthRegister,
   })
   @HttpCode(201)
-  async register(@Body() body: CreateUser) {
+  async register(@Body(CreateUserPipe) body: CreateUser) {
     return this.authService.register(body);
   }
 }

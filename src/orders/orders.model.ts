@@ -17,10 +17,8 @@ export type OrderSearch = Partial<Order>;
 
 export class OrderGetOne {
   @ApiProperty({ type: 'number', format: 'binary' })
-  @IsNumberString()
   id: number;
   @ApiProperty({ type: 'string', format: 'binary' })
-  @IsNotEmpty()
   note: string;
   @ApiProperty({ type: 'number', format: 'binary' })
   orderedById: number;
@@ -28,7 +26,6 @@ export class OrderGetOne {
 
 export class OrderCreate {
   @ApiProperty({ type: 'string', format: 'binary' })
-  @IsNotEmpty()
   note: string;
   @ApiProperty({ type: 'number', format: 'binary' })
   orderedBy: number;

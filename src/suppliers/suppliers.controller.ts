@@ -25,6 +25,7 @@ import {
 import { SuppliersService } from './suppliers.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/roles/roles.guard';
+import { CreateSupplierPipe, UpdateSupplierPipe } from './suppliers.validation.pipe';
 @ApiTags('Suppliers')
 @ApiBearerAuth()
 @Controller('suppliers')
@@ -54,7 +55,7 @@ export class SuppliersController {
     type: SupplierCreate,
   })
   @HttpCode(201)
-  create(@Body() supplier: CreateSupplier): Promise<Supplier> {
+  create(@Body(CreateSupplierPipe) supplier: CreateSupplier): Promise<Supplier> {
     return this.suppliersService.create(supplier);
   }
 
@@ -74,7 +75,7 @@ export class SuppliersController {
   @HttpCode(200)
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() supplier: Partial<Supplier>,
+    @Body(UpdateSupplierPipe) supplier: Partial<Supplier>,
   ): Promise<Supplier> {
     return this.suppliersService.update(id, supplier);
   }

@@ -18,7 +18,7 @@ import { Supplier } from 'src/suppliers/suppliers.entity';
 import { User } from './users.entity';
 import { CreateUser, UserSearch } from './users.model';
 import { UsersService } from './users.service';
-
+import { CreateUserPipe, UpdateUserPipe } from './users.validation.pipe';
 @ApiTags('Users')
 @ApiBearerAuth()
 @Controller('users')
@@ -54,7 +54,7 @@ export class UsersController {
 
   @Post()
   @HttpCode(201)
-  create(@Body() user: CreateUser): Promise<User> {
+  create(@Body(CreateUserPipe) user: CreateUser): Promise<User> {
     return this.usersService.create(user);
   }
 
@@ -66,7 +66,7 @@ export class UsersController {
 
   @Patch(':id')
   @HttpCode(200)
-  update(@Param('id') id: number, @Body() user: Partial<User>): Promise<User> {
+  update(@Param('id') id: number, @Body(UpdateUserPipe) user: Partial<User>): Promise<User> {
     return this.usersService.update(id, user);
   }
 }
