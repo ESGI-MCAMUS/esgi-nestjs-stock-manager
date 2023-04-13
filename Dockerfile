@@ -9,9 +9,7 @@ COPY package*.json .
 
 # Then install the NPM module
 RUN apt-get update && \
-    apt-get install -y default-mysql-client && \
-    yarn install
-
+    apt-get install -y default-mysql-client
 # Copy current directory to APP folder
 COPY . .
 
@@ -20,4 +18,4 @@ COPY ./.env.dev ./.env
 EXPOSE 3000
 EXPOSE 3306
 
-CMD ["yarn", "start:dev"]
+CMD ["npm", "run", "start:dev"]
