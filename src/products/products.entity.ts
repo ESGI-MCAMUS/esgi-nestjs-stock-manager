@@ -16,7 +16,7 @@ export class Product extends Model {
   @Column
   name: string;
 
-  @Column
+  @Column({ type: 'TEXT'})
   description: string;
 
   @Column
