@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Product } from 'src/products/products.entity';
+import { Product } from '../products/products.entity';
 import { Order, OrdersProducts } from './orders.entity';
 import { CreateOrder, OrdersAssociation, OrderSearch } from './orders.model';
 

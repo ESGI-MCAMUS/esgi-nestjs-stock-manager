@@ -9,8 +9,8 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
-import { Product } from 'src/products/products.entity';
-import { User } from 'src/users/users.entity';
+import { Product } from '../products/products.entity';
+import { User } from '../users/users.entity';
 
 @Table
 export class Order extends Model {

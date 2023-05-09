@@ -19,9 +19,9 @@ import {
   ProductSearch,
 } from './products.model';
 import { ProductsService } from './products.service';
-import { RolesGuard } from 'src/roles/roles.guard';
-import { Roles } from 'src/roles/roles.decorator';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RolesGuard } from '../roles/roles.guard';
+import { Roles } from '../roles/roles.decorator';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateProductPipe, UpdateProductPipe } from './products.validation.pipe';
 @ApiTags('Products')
 @ApiBearerAuth()

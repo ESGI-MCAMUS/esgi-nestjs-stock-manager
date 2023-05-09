@@ -5,11 +5,11 @@ import {
   HttpStatus,
   Logger,
 } from '@nestjs/common';
-import { OrdersAssociation } from 'src/orders/orders.model';
-import { OrdersService } from 'src/orders/orders.service';
-import { passwordService } from 'src/service/password/password.service';
-import { Supplier } from 'src/suppliers/suppliers.entity';
-import { SuppliersService } from 'src/suppliers/suppliers.service';
+import { OrdersAssociation } from '../orders/orders.model';
+import { OrdersService } from '../orders/orders.service';
+import { passwordService } from '../service/password/password.service';
+import { Supplier } from '../suppliers/suppliers.entity';
+import { SuppliersService } from '../suppliers/suppliers.service';
 import { User } from './users.entity';
 import { CreateUser, UserRoles, UserSearch } from './users.model';
 @Injectable()

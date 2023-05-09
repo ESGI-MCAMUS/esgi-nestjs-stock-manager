@@ -67,11 +67,11 @@ $ yarn db:reset
 
 ## 🙋‍♂️ Test users and passwords
 
-| Email                | Password | Role     |
-| -------------------- | -------- | -------- |
-| user@example.com     | user     | USER     |
-| supplier@example.com | supplier | SUPPLIER |
-| admin@example.com    | admin    | ADMIN    |
+| Email                | Password  | Role     |
+| -------------------- |-----------| -------- |
+| user@example.com     | Password1 | USER     |
+| supplier@example.com | Password1 | SUPPLIER |
+| admin@example.com    | Password1 | ADMIN    |
 
 ## 🪲 Known issue
 

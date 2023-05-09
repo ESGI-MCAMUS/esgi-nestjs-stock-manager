@@ -11,10 +11,10 @@ import {
   UseGuards
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { OrdersAssociation } from 'src/orders/orders.model';
-import { Roles } from 'src/roles/roles.decorator';
-import { Supplier } from 'src/suppliers/suppliers.entity';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { OrdersAssociation } from '../orders/orders.model';
+import { Roles } from '../roles/roles.decorator';
+import { Supplier } from '../suppliers/suppliers.entity';
 import { User } from './users.entity';
 import { CreateUser, UserSearch } from './users.model';
 import { UsersService } from './users.service';

@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { Product } from 'src/products/products.entity';
+import { Product } from '../products/products.entity';
 import { Order } from './orders.entity';
 import { IsNotEmpty, IsNumberString } from 'class-validator';
 

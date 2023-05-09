@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { User } from 'src/users/users.entity';
+import { User } from '../users/users.entity';
 import { Supplier } from './suppliers.entity';
 import { IsNumberString, IsEmail, IsNotEmpty, IsString, IsPhoneNumber } from 'class-validator';
 export interface CreateSupplier {

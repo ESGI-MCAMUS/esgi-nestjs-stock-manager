@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Order, OrdersProducts } from 'src/orders/orders.entity';
-import { Product } from 'src/products/products.entity';
-import { Supplier } from 'src/suppliers/suppliers.entity';
-import { User } from 'src/users/users.entity';
+import { Order, OrdersProducts } from '../../orders/orders.entity';
+import { Product } from '../../products/products.entity';
+import { Supplier } from '../../suppliers/suppliers.entity';
+import { User } from '../../users/users.entity';
 require('dotenv').config();
 
 export const databaseProviders = [
